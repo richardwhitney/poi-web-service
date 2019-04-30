@@ -1,0 +1,50 @@
+<nav class="ui inverted menu">
+  <header class="header item"><a id="sidemenu">Menu</a></header>
+  <div class="right menu">
+    <a id="home" class="item" href="/home">IoI</a>
+    <a id="settings" class="item" href="/settings">Settings</a>
+    <a id="logout" class="item" href="/logout">Logout</a>
+  </div>
+</nav>
+
+<div class="ui left vertical inverted menu sidebar">
+  <header class="header item">Categories</header>
+  <a id="openmodal" class="item">
+    Add Category
+    <i class="plus icon"></i>
+  </a>
+  <div class="ui vertical fluid inverted accordion">
+    {{#each categories}}
+      <div class="item">
+        <a class="title">
+          <i class="dropdown icon"></i>
+          {{name}}
+        </a>
+        <div class="content">
+          {{#each points}}
+            <a class="item" href="/poi/{{id}}">
+              {{name}}
+              <i class="right chevron icon"></i>
+            </a>
+          {{/each}}
+        </div>
+      </div>
+    {{/each}}
+  </div>
+
+</div>
+
+{{> addcategory}}
+
+<script>
+  $("#{{_id}}").addClass("active item");
+  $('#sidemenu').click(function() {
+    $('.ui.sidebar').sidebar('toggle');
+  });
+  $("#openmodal").click(function () {
+    $('.ui.modal').modal('show');
+  });
+  $('.ui.accordion')
+      .accordion()
+  ;
+</script>

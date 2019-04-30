@@ -1,0 +1,36 @@
+{{> mainmenu _id="home" }}
+
+<div class="ui container">
+  <section class="ui stacked segment">
+    <div class="ui grid">
+      <aside class="six wide column">
+        <div class="ui segment">
+          {{#if point.imageUrl}}
+            <img src="{{point.imageUrl}}" class="ui large image">
+          {{/if}}
+        </div>
+        <div class="ui segment">
+          <form action="/poi/addPhoto/{{point.id}}" enctype="multipart/form-data" method="POST">
+            <h3 class="ui header">Add Photo</h3>
+            <input type="file" name="image">
+            <input type="submit" value="Upload">
+          </form>
+          {{> error}}
+        </div>
+      </aside>
+      <article class="ten wide column">
+        <div class="ui segment">
+          <header class="ui header">{{point.name}}</header>
+          <h4>Description</h4>
+          <p>{{point.description}}</p>
+          <div class="ui container">
+            <a href="/updatepoi/{{point.id}}"><button class="ui blue button">Update</button></a>
+            <a href="/poi/deletePoint/{{point.id}}"><button class="negative ui right floated button">Delete</button></a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+</div>
+
+

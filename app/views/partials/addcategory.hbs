@@ -1,0 +1,15 @@
+<div class="ui modal"> <i class="close icon"></i>
+  <div class="header">
+    Add Category
+  </div>
+  <div class="content">
+    <form class="ui form" action="/addcategory" method="POST">
+      <div class="field">
+        <label>Name</label>
+        <input placeholder="Name" type="text" name="name">
+      </div>
+      <button class="ui blue submit button">Add</button>
+    </form>
+    {{> error}}
+  </div>
+</div>
