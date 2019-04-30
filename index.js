@@ -54,6 +54,7 @@ async function init() {
 
   // Load the route
   server.route(require('./routes'));
+  server.route(require('./routesapi'));
   await server.start();
   console.log(`Server running at: ${server.info.uri}`);
 }
