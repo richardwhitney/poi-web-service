@@ -43,4 +43,6 @@ suite('Point API test', function() {
     assert.equal(returnedPoint.description, 'This is a test');
     assert.equal(returnedPoint.imageUrl, 'https://res.cloudinary.com/dgbpagu5n/image/upload/v1551137682/fchlykejmf7mltor6du1.jpg');
   })
+
+
 });
