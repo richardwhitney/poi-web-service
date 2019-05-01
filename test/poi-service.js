@@ -15,7 +15,7 @@ class PoiService {
 
   async getPoint(id) {
     try {
-      const response = await axios.get(this.baseUrl + '/api/candidates/' + id);
+      const response = await axios.get(this.baseUrl + '/api/points/' + id);
       return response.data;
     } catch (e) {
       return null;
@@ -33,7 +33,7 @@ class PoiService {
   }
 
   async deleteOnePoint(id) {
-    const response = await axios.delete(this.baseUrl + '/api/candidates/' + id);
+    const response = await axios.delete(this.baseUrl + '/api/points/' + id);
     return response.data;
   }
 
