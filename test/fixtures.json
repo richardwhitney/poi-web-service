@@ -1,4 +1,25 @@
 {
+  "poiService": "http://DESKTOP-EA6LDA6:3000",
+  "users": [
+    {
+      "firstName": "Homer",
+      "lastName": "Simpson",
+      "email": "homer@simpson.com",
+      "password": "secret"
+    },
+    {
+      "firstName": "Marge",
+      "lastName": "Simpson",
+      "email": "marge@simpson.com",
+      "password": "secret"
+    },
+    {
+      "firstName": "Bart",
+      "lastName": "Simpson",
+      "email": "bart@simpson.com",
+      "password": "secret"
+    }
+  ],
   "points": [
     {
       "name": "Island More",
@@ -16,5 +37,11 @@
     "description": "The S/SW side of the island is joined to the mainland by a small bridge and a spit of marshy, grassy land, covered only by high spring tides. Carrig also has an inhabited farm and a Napoleonic battery at Q977-486 on the NW. The population is 13. The major attraction is the well-preserved Carrigafoyle Castle on the SE. The castle is more accessible from the water. Land at HW to avoid mud flats. The castle is a most interesting waystop, not to be missed by the passer-by. Thought to have been impregnable by 16th Century standards, and in 1580 Lord Pelham wasn’t convinced, and he was proved right. Military design quickly moved towards curved walls as a result. County Limerick",
     "imageUrl": "https://res.cloudinary.com/dgbpagu5n/image/upload/v1552247901/carrig-island.jpg"
 
+  },
+  "newUser": {
+    "firstName": "Lisa",
+    "lastName": "Simpson",
+    "email": "lisa@simpson.com",
+    "password": "secret"
   }
 }
