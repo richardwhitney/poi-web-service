@@ -8,6 +8,35 @@ class PoiService {
     this.baseUrl = baseUrl;
   }
 
+  async getCategories() {
+    const response = await axios.get(this.baseUrl + '/api/categories');
+    return response.data;
+  }
+
+  async getCategory(id) {
+    try {
+      const response = await axios.get(this.baseUrl + '/api/categories/' + id);
+      return response.data;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  async createCategory(newCategory) {
+    const response = await axios.post(this.baseUrl + '/api/categories', newCategory);
+    return response.data;
+  }
+
+  async deleteAllCategories() {
+    const response = await axios.delete(this.baseUrl + '/api/categories');
+    return response.data;
+  }
+
+  async deleteOneCategory(id) {
+    const response = await axios.delete(this.baseUrl + '/api/categories/' + id);
+    return response.data;
+  }
+
   async getPoints() {
     const response = await axios.get(this.baseUrl + '/api/points');
     return response.data;

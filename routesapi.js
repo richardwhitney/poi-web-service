@@ -1,7 +1,14 @@
+const CategoriesApi = require('./app/api/categories');
 const PointsApi = require('./app/api/points');
 const UsersApi = require('./app/api/users');
 
 module.exports = [
+  { method: 'GET', path: '/api/categories', config: CategoriesApi.find },
+  { method: 'GET', path: '/api/categories/{id}', config: CategoriesApi.findOne },
+  { method: 'POST', path: '/api/categories', config: CategoriesApi.create },
+  { method: 'DELETE', path: '/api/categories/{id}', config: CategoriesApi.deleteOne },
+  { method: 'DELETE', path: '/api/categories', config: CategoriesApi.deleteAll },
+
   { method: 'GET', path: '/api/points', config: PointsApi.find },
   { method: 'GET', path: '/api/points/{id}', config: PointsApi.findOne },
   { method: 'POST', path: '/api/points', config: PointsApi.create },

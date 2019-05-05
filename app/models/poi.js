@@ -7,10 +7,6 @@ const poiSchema = new Schema({
   name: String,
   description: String,
   imageUrl: String,
-  category: {
-    type: Schema.Types.ObjectId,
-    ref: 'Category'
-  },
   addedBy: {
     type: Schema.Types.ObjectId,
     ref: 'User'

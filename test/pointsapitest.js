@@ -10,17 +10,14 @@ suite('Point API test', function() {
   let points = fixtures.points;
   let newPoint = fixtures.newPoint;
 
-
   const poiService = new PoiService(fixtures.poiService);
 
   setup(async function () {
-    await poiService.deleteAllPoints();
     await poiService.deleteAllPoints();
   });
 
   teardown(async function () {
     await poiService.deleteAllPoints();
-    await poiService.deleteAllUsers();
   });
 
   test('create a point', async function() {

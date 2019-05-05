@@ -32,6 +32,20 @@
       "imageUrl": "https://res.cloudinary.com/dgbpagu5n/image/upload/v1552246219/bray-head.jpg"
     }
   ],
+  "categories": [
+    {
+      "name": "East",
+      "points": [
+
+      ]
+    },
+    {
+      "name": "Mid West",
+      "points": [
+
+      ]
+    }
+  ],
   "newPoint": {
     "name": "Carrig Island",
     "description": "The S/SW side of the island is joined to the mainland by a small bridge and a spit of marshy, grassy land, covered only by high spring tides. Carrig also has an inhabited farm and a Napoleonic battery at Q977-486 on the NW. The population is 13. The major attraction is the well-preserved Carrigafoyle Castle on the SE. The castle is more accessible from the water. Land at HW to avoid mud flats. The castle is a most interesting waystop, not to be missed by the passer-by. Thought to have been impregnable by 16th Century standards, and in 1580 Lord Pelham wasn’t convinced, and he was proved right. Military design quickly moved towards curved walls as a result. County Limerick",
@@ -43,5 +57,11 @@
     "lastName": "Simpson",
     "email": "lisa@simpson.com",
     "password": "secret"
+  },
+  "newCategory": {
+    "name": "North East",
+    "points": [
+
+    ]
   }
 }
