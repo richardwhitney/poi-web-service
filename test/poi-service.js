@@ -27,6 +27,15 @@ class PoiService {
     return response.data;
   }
 
+  async getCategoryPoints(id) {
+    try {
+      const response = await axios.get(this.baseUrl + '/api/categories/' + id + '/points');
+      return response.data;
+    } catch (e) {
+      return null;
+    }
+  }
+
   async deleteAllCategories() {
     const response = await axios.delete(this.baseUrl + '/api/categories');
     return response.data;
@@ -51,9 +60,13 @@ class PoiService {
     }
   }
 
-  async createPoint(newPoint) {
-    const response = await axios.post(this.baseUrl + '/api/points', newPoint);
-    return response.data;
+  async createPoint(id, newPoint) {
+    try {
+      const response = await axios.post(this.baseUrl + '/api/categories/' + id + '/points', newPoint);
+      return response.data;
+    } catch (e) {
+      return null;
+    }
   }
 
   async deleteAllPoints() {

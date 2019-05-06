@@ -9,6 +9,9 @@ module.exports = [
   { method: 'DELETE', path: '/api/categories/{id}', config: CategoriesApi.deleteOne },
   { method: 'DELETE', path: '/api/categories', config: CategoriesApi.deleteAll },
 
+  { method: 'GET', path: '/api/categories/{id}/points', config: CategoriesApi.findPoints },
+  { method: 'POST', path: '/api/categories/{id}/points', config: PointsApi.create },
+
   { method: 'GET', path: '/api/points', config: PointsApi.find },
   { method: 'GET', path: '/api/points/{id}', config: PointsApi.findOne },
   { method: 'POST', path: '/api/points', config: PointsApi.create },

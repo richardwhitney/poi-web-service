@@ -17,11 +17,26 @@ const Categories = {
     auth: false,
     handler: async function(request, h) {
       try {
-        const category = await Category.findOne({ _id: request.params.id });
+        const category = await Category.findOne({ _id: request.params.id }).populate('points');
         if (!category) {
           return Boom.badImplementation('No category with this id');
         }
         return category;
+      } catch (e) {
+        return Boom.notFound('No category with this id');
+      }
+    }
+  },
+
+  findPoints: {
+    auth: false,
+    handler: async function(request, h) {
+      try {
+        const category = await Category.findOne({ _id: request.params.id }).populate('points');
+        if (!category) {
+          return Boom.badImplementation('No category with this id');
+        }
+        return category.points;
       } catch (e) {
         return Boom.notFound('No category with this id');
       }

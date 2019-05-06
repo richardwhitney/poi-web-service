@@ -9,25 +9,32 @@ suite('Point API test', function() {
 
   let points = fixtures.points;
   let newPoint = fixtures.newPoint;
+  let newCategory = fixtures.newCategory;
 
   const poiService = new PoiService(fixtures.poiService);
 
   setup(async function () {
+    await poiService.deleteAllCategories();
     await poiService.deleteAllPoints();
   });
 
   teardown(async function () {
+    await poiService.deleteAllCategories();
     await poiService.deleteAllPoints();
   });
 
   test('create a point', async function() {
-    const returnedPoint = await poiService.createPoint(newPoint);
-    assert(_.some([returnedPoint], newPoint), 'returnedPoint must be a superset of newPoint');
+    const returnedCategory = await poiService.createCategory(newCategory);
+    const returnedPoint = await poiService.createPoint(returnedCategory._id, newPoint);
+    const returnedPoints = await poiService.getCategoryPoints(returnedCategory._id);
+    assert.equal(returnedPoints.length, 1);
+    assert(_.some([returnedPoints[0]], newPoint), 'returnedPoint must be a superset of newPoint');
     assert.isDefined(returnedPoint._id);
   });
 
   test('get point', async function() {
-    const p1 = await poiService.createPoint(newPoint);
+    const returnedCategory = await poiService.createCategory(newCategory);
+    const p1 = await poiService.createPoint(returnedCategory._id, newPoint);
     const p2 = await poiService.getPoint(p1._id);
     assert.deepEqual(p1, p2);
   });
@@ -40,16 +47,20 @@ suite('Point API test', function() {
   });
 
   test('delete a point', async function() {
-    let p = await poiService.createPoint(newPoint);
+    const returnedCategory = await poiService.createCategory(newCategory);
+    let p = await poiService.createPoint(returnedCategory._id, newPoint);
     assert(p._id != null);
     await poiService.deleteOnePoint(p._id);
     p = await poiService.getPoint(p._id);
+    const returnedPoints = await poiService.getCategoryPoints(returnedCategory._id);
     assert(p == null);
+    assert.equal(returnedPoints.length, 0);
   });
 
   test('get all points', async function() {
+    const returnedCategory = await poiService.createCategory(newCategory);
     for (let p of points) {
-      await poiService.createPoint(p);
+      await poiService.createPoint(returnedCategory._id, p);
     }
 
     const allPoints = await poiService.getPoints();
@@ -57,8 +68,9 @@ suite('Point API test', function() {
   });
 
   test('get points detail', async function() {
+    const returnedCategory = await poiService.createCategory(newCategory);
     for (let p of points) {
-      await poiService.createPoint(p);
+      await poiService.createPoint(returnedCategory._id, p);
     }
 
     const allPoints = await poiService.getPoints();

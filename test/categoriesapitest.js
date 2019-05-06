@@ -9,6 +9,7 @@ suite('Category API test', function() {
 
   let categories = fixtures.categories;
   let newCategory = fixtures.newCategory;
+  let newPoint = fixtures.newPoint;
 
   const poiService = new PoiService(fixtures.poiService);
 
@@ -54,6 +55,15 @@ suite('Category API test', function() {
 
     const allCategories = await poiService.getCategories();
     assert.equal(allCategories.length, categories.length);
+  });
+
+  test('get categories points', async function() {
+    const c = await poiService.createCategory(newCategory);
+    await poiService.createPoint(c._id, newPoint);
+    const points = await poiService.getCategoryPoints(c._id);
+    assert.equal(points.length, 1);
+    assert(_.some([points[0]], newPoint), 'returnedPoint must be a superset of newPoint');
+    assert.isDefined(points[0]._id);
   });
 
   test('get categories detail', async function() {
