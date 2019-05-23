@@ -3,6 +3,7 @@
 const Point = require('../models/poi');
 const Category = require('../models/category');
 const Boom = require('boom');
+const utils = require('./utils');
 
 const Points = {
 
@@ -53,11 +54,14 @@ const Points = {
     },
     handler: async function(request, h) {
       try {
+        const userId = utils.getUserIdFromRequest(request);
+        console.log('User id: ' + userId);
         let newPoint = new Point(request.payload);
         let newCategory = await Category.findOne({ _id: request.params.id });
         if (!newCategory) {
           return Boom.notFound('No category with this id');
         }
+        newPoint.addedBy = userId;
         const point = await newPoint.save();
         if (point) {
           console.log('Category length: ' + newCategory.points.length);

@@ -14,10 +14,13 @@ suite('Usre API tests', function() {
 
   setup(async function () {
     await poiService.deleteAllUsers();
+    const returnedUser = await poiService.createUser(newUser);
+    const response = await poiService.authenticate(newUser);
   });
 
   teardown(async function () {
     await poiService.deleteAllUsers();
+    await poiService.clearAuth();
   });
 
   test('create a user', async function() {
@@ -48,19 +51,32 @@ suite('Usre API tests', function() {
   });
 
   test('get all users', async function() {
+    await poiService.deleteAllUsers();
+    await poiService.createUser(newUser);
+    await poiService.authenticate(newUser);
     for (let u of users) {
       await poiService.createUser(u);
     }
 
     const allUsers = await poiService.getUsers();
-    assert.equal(allUsers.length, users.length);
+    assert.equal(allUsers.length, users.length + 1);
   });
 
   test('get users detail', async function() {
+    await poiService.deleteAllUsers();
+    const user = await poiService.createUser(newUser);
+    await poiService.authenticate(newUser);
     for (let u of users) {
       await poiService.createUser(u);
     }
 
+    const testUser = {
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      password: user.password
+    };
+    users.unshift(testUser);
     const allUsers = await poiService.getUsers();
     for (let i = 0; i < users.length; i++) {
       assert(_.some([allUsers[i]], users[i]), 'returnedUser must be a superset of newUser');
@@ -68,8 +84,11 @@ suite('Usre API tests', function() {
   });
 
   test('get all users empty', async function() {
+    await poiService.deleteAllUsers();
+    await poiService.createUser(newUser);
+    await poiService.authenticate(newUser);
     const allUsers = await poiService.getUsers();
-    assert.equal(allUsers.length, 0);
+    assert.equal(allUsers.length, 1);
   });
 
 });

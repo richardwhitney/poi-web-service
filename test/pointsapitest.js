@@ -25,6 +25,7 @@ suite('Point API test', function() {
   teardown(async function () {
     await poiService.deleteAllCategories();
     await poiService.deleteAllPoints();
+    await poiService.deleteAllUsers();
     await poiService.clearAuth();
   });
 
@@ -88,5 +89,15 @@ suite('Point API test', function() {
     const allPoints = await poiService.getPoints();
     assert.equal(allPoints.length, 0);
   });
+
+  test('creat a point and check addedBy', async function () {
+    const returnedCategory = await poiService.createCategory(newCategory);
+    await poiService.createPoint(returnedCategory._id, points[0]);
+    const returnedPoints = await poiService.getCategoryPoints(returnedCategory._id);
+    assert.isDefined(returnedPoints[0].addedBy);
+
+    const users = await poiService.getUsers();
+    assert(_.some([users[0]], newUser), 'returnedUser must be a superset of newUser');
+  })
 
 });

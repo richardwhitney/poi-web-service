@@ -29,3 +29,16 @@ exports.validate = async function (decoded, request) {
     return { isValid: true };
   }
 };
+
+exports.getUserIdFromRequest = function (request) {
+  let userId = null;
+  try {
+    const authorization = request.headers.authorization;
+    let token = authorization.split('')[1];
+    let decodedToken = jwt.verify(token, 'secretpassworddontrevealtoanyone');
+    userId = decodedToken.id;
+  } catch (e) {
+    userId = null;
+  }
+  return userId;
+};

@@ -7,7 +7,9 @@ const utils = require('./utils');
 const Users = {
 
   find: {
-    auth: false,
+    auth: {
+      strategy: 'jwt',
+    },
     handler: async function(request, h) {
       const users = await User.find();
       return users;
@@ -15,7 +17,9 @@ const Users = {
   },
 
   findOne: {
-    auth: false,
+    auth: {
+      strategy: 'jwt',
+    },
     handler: async function(request, h) {
       try {
         const user = await User.findOne({ _id: request.params.id });
@@ -42,7 +46,9 @@ const Users = {
   },
 
   deleteAll: {
-    auth: false,
+    auth: {
+      strategy: 'jwt',
+    },
     handler: async function(request, h) {
       await User.deleteMany({});
       return { success: true };
@@ -50,7 +56,9 @@ const Users = {
   },
 
   deleteOne: {
-    auth: false,
+    auth: {
+      strategy: 'jwt',
+    },
     handler: async function(request, h) {
       const user = await User.deleteOne({ _id: request.params.id });
       if (user) {
