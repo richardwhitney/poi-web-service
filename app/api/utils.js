@@ -14,6 +14,7 @@ exports.decodeToken = function (token) {
     var decoded = jwt.verify(token, 'secretpassworddontrevealtoanyone');
     userInfo.userId = decoded.id;
     userInfo.email = decoded.email;
+    console.log('User id: ' + userInfo.userId + ', User email: ' + userInfo.email);
   } catch (e) {
 
   }
@@ -32,11 +33,13 @@ exports.validate = async function (decoded, request) {
 
 exports.getUserIdFromRequest = function (request) {
   let userId = null;
+  console.log('User id from request called');
   try {
     const authorization = request.headers.authorization;
-    let token = authorization.split('')[1];
+    var token = authorization.split(' ')[1];
     let decodedToken = jwt.verify(token, 'secretpassworddontrevealtoanyone');
     userId = decodedToken.id;
+    console.log('User id from token: ' + userId);
   } catch (e) {
     userId = null;
   }

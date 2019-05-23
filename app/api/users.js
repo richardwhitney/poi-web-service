@@ -33,6 +33,24 @@ const Users = {
     }
   },
 
+  findCurrent: {
+    auth: {
+      strategy: 'jwt',
+    },
+    handler: async function(request, h) {
+      try {
+        const userId = utils.getUserIdFromRequest(request);
+        const currentUser = await User.findOne({ _id: userId });
+        if (!currentUser) {
+          return Boom.notFound('No User with this id');
+        }
+        return currentUser;
+      } catch (e) {
+        return Boom.notFound('No User with this id');
+      }
+    }
+  },
+
   create: {
     auth: false,
     handler: async function(request, h) {

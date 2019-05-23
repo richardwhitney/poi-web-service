@@ -24,4 +24,13 @@ suite('Authenticate API tests', function () {
     assert(response.success);
     assert.isDefined(response.token);
   });
+
+  test('verify Token', async function () {
+    const returnedUser = await poiService.createUser(newUser);
+    const response = await poiService.authenticate(newUser);
+
+    const userInfo = utils.decodeToken(response.token);
+    assert.equal(userInfo.email, returnedUser.email);
+    assert.equal(userInfo.userId, returnedUser._id);
+  })
 });

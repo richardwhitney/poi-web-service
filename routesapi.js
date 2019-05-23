@@ -20,6 +20,7 @@ module.exports = [
 
   { method: 'GET', path: '/api/users', config: UsersApi.find },
   { method: 'GET', path: '/api/users/{id}', config: UsersApi.findOne },
+  { method: 'GET', path: '/api/users/current', config: UsersApi.findCurrent },
   { method: 'POST', path: '/api/users', config: UsersApi.create },
   { method: 'DELETE', path: '/api/users/{id}', config: UsersApi.deleteOne },
   { method: 'DELETE', path: '/api/users', config: UsersApi.deleteAll },
