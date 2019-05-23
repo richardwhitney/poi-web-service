@@ -7,7 +7,9 @@ const Boom = require('boom');
 const Points = {
 
   find: {
-    auth: false,
+    auth: {
+      strategy: 'jwt',
+    },
     handler: async function(request, h) {
       const points = await Point.find();
       return points;
@@ -15,7 +17,9 @@ const Points = {
   },
 
   findOne: {
-    auth: false,
+    auth: {
+      strategy: 'jwt',
+    },
     handler: async function(request, h) {
       try {
         const point = await Point.findOne({ _id: request.params.id });
@@ -30,7 +34,9 @@ const Points = {
   },
 
   findByCategory: {
-    auth: false,
+    auth: {
+      strategy: 'jwt',
+    },
     handler: async function(request, h) {
       try {
         const points = await Point.find({ category: request.params.id });
@@ -42,7 +48,9 @@ const Points = {
   },
 
   create: {
-    auth: false,
+    auth: {
+      strategy: 'jwt',
+    },
     handler: async function(request, h) {
       try {
         let newPoint = new Point(request.payload);
@@ -66,7 +74,9 @@ const Points = {
   },
 
   deleteAll: {
-    auth: false,
+    auth: {
+      strategy: 'jwt',
+    },
     handler: async function(request, h) {
       await Point.remove({});
       return { success: true };
@@ -74,7 +84,9 @@ const Points = {
   },
 
   deleteOne: {
-    auth: false,
+    auth: {
+      strategy: 'jwt',
+    },
     handler: async function(request, h) {
       const response = await Point.deleteOne({ _id: request.params.id });
       if (response.deletedCount == 1) {

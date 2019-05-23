@@ -10,15 +10,21 @@ suite('Category API test', function() {
   let categories = fixtures.categories;
   let newCategory = fixtures.newCategory;
   let newPoint = fixtures.newPoint;
+  let newUser = fixtures.newUser;
 
   const poiService = new PoiService(fixtures.poiService);
 
   setup(async function() {
+    await poiService.deleteAllUsers();
+    const returnedUser = await poiService.createUser(newUser);
+    const response = await poiService.authenticate(newUser);
     await poiService.deleteAllCategories();
   });
 
   teardown(async function() {
     await poiService.deleteAllCategories();
+    await poiService.deleteAllUsers();
+    await poiService.clearAuth();
   });
 
   test('create a category', async function() {

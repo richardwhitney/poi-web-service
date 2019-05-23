@@ -13,7 +13,7 @@ suite('Usre API tests', function() {
   const poiService = new PoiService(fixtures.poiService);
 
   setup(async function () {
-    await poiService.deleteAllPoints();
+    await poiService.deleteAllUsers();
   });
 
   teardown(async function () {

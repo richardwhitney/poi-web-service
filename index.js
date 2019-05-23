@@ -7,6 +7,7 @@
 const Hapi = require("hapi");
 const dotenv = require('dotenv');
 const result = dotenv.config();
+const utils = require('./app/api/utils');
 
 if (result.error) {
   console.log(result.error.message);
@@ -18,6 +19,7 @@ require('./app/models/db');
 // Create local server object
 const server = Hapi.server({
   port: process.env.PORT || 3000,
+  routes: { cors: true }
 });
 
 // Init function to start server
@@ -25,6 +27,7 @@ async function init() {
   await server.register(require('inert'));
   await server.register(require('vision'));
   await server.register(require('hapi-auth-cookie'));
+  await server.register(require('hapi-auth-jwt2'));
 
   // Configure handlebars
   server.views({
@@ -45,6 +48,12 @@ async function init() {
     isSecure: false,
     ttl: 24 * 60 * 60 * 1000,
     redirectTo: '/'
+  });
+
+  server.auth.strategy('jwt', 'jwt', {
+    key: 'secretpassworddontrevealtoanyone',
+    validate: utils.validate,
+    verifyOptions: { algorithms: ['HS256']},
   });
 
   server.auth.default({
