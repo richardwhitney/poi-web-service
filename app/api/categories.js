@@ -10,7 +10,10 @@ const Categories = {
       strategy: 'jwt',
     },
     handler: async function(request, h) {
-      const categories = await Category.find();
+      const categories = await Category.find().populate('points');
+      for (let category of categories) {
+        console.log(category.name + ' point list length: ' + category.points);
+      }
       return categories;
     }
   },
@@ -22,6 +25,7 @@ const Categories = {
     handler: async function(request, h) {
       try {
         const category = await Category.findOne({ _id: request.params.id }).populate('points');
+        console.log('Category point list length: ' + category.points.lenght);
         if (!category) {
           return Boom.badImplementation('No category with this id');
         }
@@ -39,6 +43,7 @@ const Categories = {
     handler: async function(request, h) {
       try {
         const category = await Category.findOne({ _id: request.params.id }).populate('points');
+        console.log('Category point list length: ' + category.points.lenght);
         if (!category) {
           return Boom.badImplementation('No category with this id');
         }
@@ -72,6 +77,15 @@ const Categories = {
       return { success: true };
     }
   },
+
+  /*deleteCategoryPoint: {
+    auth: {
+      strategy: 'jwt',
+    },
+    handler: async function(request, h) {
+      const point = await
+    }
+  }*/
 
   deleteOne: {
     auth: {

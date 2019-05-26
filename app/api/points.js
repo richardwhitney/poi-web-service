@@ -77,6 +77,33 @@ const Points = {
     }
   },
 
+  update: {
+    auth: {
+      strategy: 'jwt'
+    },
+    handler: async function(request, h) {
+      try {
+        const newPoint = request.payload;
+        const oldPoint = await Point.findOne({ _id: request.params.id });
+        if (!oldPoint) {
+          return Boom.notFound('No point with this id');
+        }
+
+        oldPoint.name = newPoint.name;
+        oldPoint.description = newPoint.description;
+        oldPoint.geo.lat = newPoint.geo.lat;
+        oldPoint.geo.lng = newPoint.geo.lng;
+
+        const updatedPoint = await oldPoint.save();
+        if (updatedPoint) {
+          return h.response(updatedPoint).code(201);
+        }
+      } catch (e) {
+        return Boom.badImplementation('error updating point');
+      }
+    }
+  },
+
   deleteAll: {
     auth: {
       strategy: 'jwt',
@@ -92,6 +119,7 @@ const Points = {
       strategy: 'jwt',
     },
     handler: async function(request, h) {
+      //const response = await Point.findByIdAndRemove(request.params.id);
       const response = await Point.deleteOne({ _id: request.params.id });
       if (response.deletedCount == 1) {
         return { success: true };
