@@ -10,6 +10,10 @@ const poiSchema = new Schema({
   addedBy: {
     type: Schema.Types.ObjectId,
     ref: 'User'
+  },
+  geo: {
+    lat: Number,
+    lng: Number
   }
 });
 
