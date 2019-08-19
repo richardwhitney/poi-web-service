@@ -42,12 +42,12 @@ const Points = {
   },
 
   findByCategory: {
-    /*
+
     auth: {
       strategy: 'jwt',
     },
-    */
-    auth: false,
+
+    //auth: false,
     handler: async function(request, h) {
       try {
         const points = await Point.find({ category: request.params.id });
@@ -59,12 +59,12 @@ const Points = {
   },
 
   create: {
-    /*
+
     auth: {
       strategy: 'jwt',
     },
-    */
-    auth: false,
+
+    //auth: false,
     handler: async function(request, h) {
       try {
         const userId = utils.getUserIdFromRequest(request);
@@ -91,12 +91,12 @@ const Points = {
   },
 
   update: {
-    /*
+
     auth: {
       strategy: 'jwt',
     },
-    */
-    auth: false,
+
+    //auth: false,
     handler: async function(request, h) {
       try {
         const newPoint = request.payload;
@@ -121,12 +121,12 @@ const Points = {
   },
 
   deleteAll: {
-    /*
+
     auth: {
       strategy: 'jwt',
     },
-    */
-    auth: false,
+
+    //auth: false,
     handler: async function(request, h) {
       await Point.remove({});
       return { success: true };
