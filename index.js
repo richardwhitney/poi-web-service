@@ -18,7 +18,7 @@ require('./app/models/db');
 
 // Create local server object
 const server = Hapi.server({
-  port: process.env.PORT || 3000,
+  port: process.env.PORT || 3002,
   routes: { cors: true }
 });
 
